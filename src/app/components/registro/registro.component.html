@@ -1,0 +1,127 @@
+<div class="container">
+    <form  #f="ngForm">
+        <div class="row">
+            <div class="col-12 text-center mt-5"> 
+                <h1><b>REGISTRO DE DEFECTOS</b></h1>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div  class="col-4 text-center mb-1 mt-2 offset-xl-4 offset-xs-4 offset-sm-4 offset-md-4 offset-lg-4  offset-">
+                <button *ngIf="!activecamaradefecto" #enablebtn (click)="enablecamera()" type="button" class="btn btn-outline-success mb-2">{{hasPermision?'DESACTIVAR CAMARA':'ACTIVAR CAMARA'}}</button>
+                <select #searchBox  (change)="onDeviceSelectChange(searchBox.value)" class="form-control">
+                    <option value="" [selected]="!currentDevice">No Device Selected</option>
+                    <option *ngFor="let device of availableDevices" [value]="device.deviceId" [selected]="currentDevice && device.deviceId === currentDevice.deviceId">{{ device.label }}</option>
+                </select> 
+                <div class="camerasize">
+                    <zxing-scanner *ngIf="hasPermision" (camerasFound)="camerasFoundHandler($event)" style="width: 250px;height: 250px;" #scanner [enable]="hasPermision" [device]="currentDevice" (scanSuccess)="handleQrCodeResult($event)" >
+                    </zxing-scanner>
+                </div>
+                   
+                
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 bt"> 
+                <div class="form-group">
+                    <input (keydown.enter)="searcha()" [ngModelOptions]="{standalone: true}" [(ngModel)]="no.serie" 
+                    type="text" class="form-control" placeholder="" class="form-control" placeholder=" ">
+                    <label class="form-label">SERIAL</label>
+                  </div> 
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 bt">
+                <div class="form-group">
+                    <input [ngModelOptions]="{standalone: true}" [(ngModel)]="no.planta" type="text" class="form-control" 
+                    placeholder=" " [disabled]="true">
+                        <label class="form-label">PLANTA</label> 
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 bt"> 
+                <div class="form-group">
+                    <input [ngModelOptions]="{standalone: true}" [(ngModel)]="no.model" type="text" class="form-control"
+                     placeholder=" " [disabled]="true" >
+                        <label class="form-label">MODELO</label> 
+                </div> 
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 bt">
+                <div class="form-group">
+                    <input [ngModelOptions]="{standalone: true}" [(ngModel)]="no.parte" type="text" class="form-control"
+                     placeholder=" " [disabled]="true" >
+                        <label class="form-label"># DE PARTE</label> 
+                </div>  
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-3  bt">
+                <div class="form-group">
+                    <input [ngModelOptions]="{standalone: true}"  [(ngModel)]="no.desc" type="text" class="form-control"
+                     placeholder=" " [disabled]="true" >
+                        <label class="form-label">DESCRIPCION</label> 
+                </div>  
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 bt">
+                <div class="form-group">
+                    <input [ngModelOptions]="{standalone: true}" [(ngModel)]="no.comp" type="text" class="form-control"
+                     placeholder=" " [disabled]="true" >
+                        <label class="form-label">COMPONENTE</label> 
+                </div>  
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 bt">
+                <div class="form-group">
+                    <input [ngModelOptions]="{standalone: true}" [(ngModel)]="no.contenedor" type="text" class="form-control"
+                     placeholder=" " [disabled]="true" >
+                        <label class="form-label">CONTENEDOR</label> 
+                </div>  
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 bt">
+                <div class="form-group">
+                    <input [ngModelOptions]="{standalone: true}" [(ngModel)]="no.fh_impresion" type="text" class="form-control"
+                     placeholder=" "[disabled]="true" >
+                        <label class="form-label">FECHA IMPRESION</label> 
+                </div>   
+            </div>
+        </div>
+        <div class="row"> 
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 bt">
+                <div class="form-group">
+                    <input [ngModelOptions]="{standalone: true}" [(ngModel)]="no.fh_inspecion" type="text" class="form-control"
+                     placeholder=" "[disabled]="true" >
+                        <label class="form-label">FECHA INSPECCION</label> 
+                </div>
+            </div> 
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 bt"> 
+                <div class="form-group">
+                    <input [ngModelOptions]="{standalone: true}" [(ngModel)]="no.fh_empacado" type="text" class="form-control" 
+                     placeholder=" "[disabled]="true" >
+                        <label class="form-label">FECHA EMPACADO</label> 
+                </div> 
+                
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 bt"> 
+                <div class="form-group">
+                    <input [ngModelOptions]="{standalone: true}" [(ngModel)]="no.fh_embarcado" type="text" class="form-control" 
+                     placeholder=" "[disabled]="true" >
+                        <label class="form-label">FECHA EMBARCADO</label> 
+                </div> 
+                
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 bt"> 
+                <select #valuedefecto [disabled]="activeform" (change)="selectdefecto(valuedefecto.value)" class="form-control" id="exampleFormControlSelect1">
+                    <option >SELECCIONE UN DEFECTO</option> 
+                    <option *ngFor="let de of def" [value]="de.codigo">{{de.espanol+" / "+de.codigo}}</option> 
+                  </select>
+            </div>
+        </div>
+        <div [hidden]="!activecamaradefecto" class="row"> 
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 bt">
+                <app-webcamsnapshots [activarCamera]="activecamaradefecto" (valuePicture)="recibipic($event)" (valueResponse)="recibiRespuesta($event)"></app-webcamsnapshots>
+            </div> 
+           
+        </div>
+        <div class="row">
+            <div class="col-12 text-center bt mb-3">
+                <button type="button" (click)="subform()" class="btn btn-outline-primary" [disabled]="enviarform"><b>GUARDAR DEFECTO</b></button>
+            </div>
+        </div>
+    </form>
+</div>

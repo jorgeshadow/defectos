@@ -1,0 +1,22 @@
+<div class="video-container" *ngIf="activarCamera">
+	<video (canplay)="false" [class.show]="!isCaptured" [class.hide]="isCaptured" #video id="video" [width]="WIDTH" [height]="HEIGHT"></video>
+	<canvas [class.show]="isCaptured" [class.hide]="!isCaptured" #canvas id="canvas" [width]="WIDTH"
+		[height]="HEIGHT"></canvas>
+	<div  class="snap-container">
+		<button class="btn btn-success"  (click)="habilitarCamara()">{{namebtnactive}}</button>
+		<button class="btn btn-primary" style="margin-left: 10px;" *ngIf="!isCaptured" (click)="capture()"><i class="bi bi-camera"></i></button>
+		<button class="btn btn-danger"  style="margin-left: 10px;" *ngIf="isCaptured" (click)="removeCurrent()"><i class="bi bi-trash"></i></button>
+			<div *ngIf="error" class="text-danger mt-4">
+				{{ error }}. Please click refresh on stackblitz
+				<div class="mt-5">
+					<img src="https://trungk18.com/7e0976255739e721501803ee074f1f94/camera.gif" />
+				</div>
+			</div>
+	</div>
+</div>
+
+	<!-- <ul class="list-unstyled">
+		<li *ngFor="let src of captures; let idx = index" (click)="setPhoto(idx)">
+			<img [src]="src" height="50" />
+  		</li>
+	</ul> -->

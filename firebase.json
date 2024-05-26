@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/entrevista",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
